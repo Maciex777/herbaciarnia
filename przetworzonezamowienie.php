@@ -116,8 +116,43 @@ $jak = $_POST['jak'];
 	$wartosc = $wartosc * (1 + $stawkavat); 
 	  echo 'Cena brutto: '.number_format($wartosc, 2).' PLN<br/>';
 	  echo "<p>Adres wysyłki to ".$adres. "<p>";
-    
-    ?>
+	  
+	  switch($jak) {
+		  case "a":
+			echo "<p>Stały klient.</p>";
+			break;
+		  case "b":
+			echo "<p>Źródło informacji - reklama telewizyjna.</p>";
+			break;
+		  case "c":
+			echo "<p>Źródło informacji - książka telefoniczna.</p>";
+			break;
+		  case "d":
+			echo "<p>Źródło informacji - znajomy.</p>";
+			break;	
+		  default:
+			echo "<p>Źródło informacji - Źródło nieznane.</p>";
+			break;	
+	  }		
+
+	  echo "<p>Na adres mailowy ".$email. " zostaną przesłane:<br/>- zapytanie o potwierdzenie zamówienia<br/>- informacje dotyczące odbioru<p>";
+	  
+	//otwarcie pliku i dopisanie zamówienia
+	$wp = @fopen("zamowienia/zamowienia.txt", 'ab');
+	flock($wp, LOCK_EX); 	//blokada zapisu pliku
+
+		if (!$wp) {
+		  echo "<p><strong>Zamówienie Państwa nie może zostać przyjęte w tej chwili.
+					Proszę spróbować później.</strong></p></body></html>";
+		  exit;
+		}
+		
+	$ciagwyjsciowy = $data."\t".$iloscczarnej." sztuk herbaty czarnej \t".$iloscearlgrey." sztuk herbaty Earl Grey\t".$ilosczielonej." sztuk herbaty zielonej\t".$iloscszalwiowej." sztuk herbaty szałwiowej\t".$iloscmietowej." sztuk herbaty miętowej\t".$iloscmelisowej." sztuk herbaty melisowej\t".$iloscrumiankowej." sztuk herbaty rumiankowej\t".$iloscdziurawcowej." sztuk herbaty dziurawcowej\t".$iloscjasminowej." sztuk herbaty jaśminowej\t".$wartosc."PLN\t".$adres."\n";
+	fwrite($wp, $ciagwyjsciowy, strlen($ciagwyjsciowy));
+	flock($wp, LOCK_UN);		//zwolnienie blokady zapisu
+	fclose($wp);
+	} 
+	?>
 	<a href="e-sklep.php" class="btn btn-success" role="button">Wróć do sklepu</a>
 	</div>
   </div>
