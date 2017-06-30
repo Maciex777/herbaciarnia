@@ -114,7 +114,46 @@
 			</tr>  
 		</table>
 	</form>
-	 </div>
+	
+	<div class="col-xs-12 col-md-4">
+	<h2>Cennik</h2>
+	<table>
+	  <tr>
+		<td class="headtable" width="240" bgcolor = "#CCCCCC" align="center">Produkt</td>
+		<td class="headtable" width="100" bgcolor = "#CCCCCC" align="center">Cena</td>
+	  </tr>
+	  <?php  
+	  $ceny = array('Herbata czarna'=>10, 'Herbata Earl Grey'=>6, 'Herbata zielona'=>8, 'Herbata szałwiowa'=>12, 'Herbata miętowa'=>10, 'Herbata melisowa'=>12, 'Herbata rumiankowa'=>10, 'Herbata dziurawcowa'=>14, 'Herbata jaśminowa'=>16);
+	  
+	  reset($ceny);
+	  while (list($produkt, $cena) = each($ceny)){
+		  echo "<tr>
+				   <td align=\"right\">".$produkt."</td>
+				   <td align=\"right\">".$cena." PLN</td>
+				   </tr>\n";
+	  }	  
+	  ?>
+	</table>
+	</div>
+	
+	<div  class="col-xs-12 col-md-4">
+	<h2>Koszty transportu</h2>	
+	<table border="0" cellpading="3">
+	  <tr>
+		<td class="headtable" width="160"  align="center">Odległość</td>
+		<td class="headtable" width="160"  align="center">Koszt</td>
+	  </tr>
+	  <?php
+	  for($odleglosc = 50; $odleglosc <=500; $odleglosc += 50) {
+		  echo "<tr>
+				   <td align=\"right\">".$odleglosc." km</td>
+				   <td align=\"right\">".($odleglosc / 10)." PLN</td>
+				   </tr>\n";
+	  }
+	  ?>
+	</table>
+	</div>
+ </div>
  </div>
 </div>
 
