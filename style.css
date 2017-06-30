@@ -64,6 +64,10 @@ ul.nav.navbar-nav{
 	float:left;	
 }
 
+.content{
+	background:url("images/351b.jpg") repeat left center;
+}
+
 table, td{
 	border:2px solid black;
 	font-size:17px;
